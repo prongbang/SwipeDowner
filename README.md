@@ -32,6 +32,18 @@ SwipeDowner(this).builder(window.decorView.rootView).isWarning().message("Warnin
 
 // success
 SwipeDowner(this).builder(window.decorView.rootView).isSuccess().message("Success").show()
+
+// or
+val rootView = findViewById<View>(android.R.id.content).rootView
+
+// error
+SwipeDowner(this).builder(rootView).isError().message("Error").show()
+
+// warning
+SwipeDowner(this).builder(rootView).isWarning().message("Warning").show()
+
+// success
+SwipeDowner(this).builder(rootView).isSuccess().message("Success").show()
 ```
 
 > In Fragment
@@ -44,4 +56,18 @@ SwipeDowner(context).builder(activity?.window?.decorView?.rootView).isWarning().
 
 // success
 SwipeDowner(context).builder(activity?.window?.decorView?.rootView).isSuccess().message("Success").show()
+
+// or
+override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+    // error
+    SwipeDowner(context).builder(container?.rootView).isError().message("Error").show()
+
+    // warning
+    SwipeDowner(context).builder(container?.rootView).isWarning().message("Warning").show()
+
+    // success
+    SwipeDowner(context).builder(container?.rootView).isSuccess().message("Success").show()
+
+}
 ```
