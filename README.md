@@ -1,4 +1,4 @@
-# Localization
+# Swipe Downer
 
 Swipe Downer Message Android Library
 
