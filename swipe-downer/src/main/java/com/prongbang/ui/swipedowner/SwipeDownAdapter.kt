@@ -39,4 +39,8 @@ interface SwipeDownAdapter<T> {
 
     fun setDuration(duration: Long): T
 
+    fun onClosed(onCloseListener: OnCloseListener): T
+
+    fun isClosed(): Boolean
+
 }
