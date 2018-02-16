@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.prongbang.ui.swipedowner.OnCloseListener
 import com.prongbang.ui.swipedowner.SwipeDowner
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,16 +16,41 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        var closedSuccess = true
+        var closedWarning = true
+        var closedError = true
+
         fab1.setOnClickListener { view ->
-            SwipeDowner(this).builder(window.decorView.rootView).isError().message("Error").show()
+            if (closedError) {
+                closedError = false
+                SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+                    override fun onClosed() {
+                        closedError = true
+                    }
+                }).isError().message("Error").show()
+            }
         }
 
         fab2.setOnClickListener { view ->
-            SwipeDowner(this).builder(window.decorView.rootView).isWarning().message("Warning").show()
+            if (closedWarning) {
+                closedWarning = false
+                SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+                    override fun onClosed() {
+                        closedWarning = true
+                    }
+                }).isWarning().message("Warning").show()
+            }
         }
 
         fab3.setOnClickListener { view ->
-            SwipeDowner(this).builder(window.decorView.rootView).isSuccess().message("Success").show()
+            if (closedSuccess) {
+                closedSuccess = false
+                SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+                    override fun onClosed() {
+                        closedSuccess = true
+                    }
+                }).isSuccess().message("Success").show()
+            }
         }
 
     }

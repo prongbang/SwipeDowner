@@ -71,3 +71,44 @@ override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, saved
 
 }
 ```
+
+> Example
+```kotlin
+
+var closedSuccess = true
+var closedWarning = true
+var closedError = true
+
+fab1.setOnClickListener { view ->
+    if (closedError) {
+        closedError = false
+        SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+            override fun onClosed() {
+                closedError = true
+            }
+        }).isError().message("Error").show()
+    }
+}
+
+fab2.setOnClickListener { view ->
+    if (closedWarning) {
+        closedWarning = false
+        SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+            override fun onClosed() {
+                closedWarning = true
+            }
+        }).isWarning().message("Warning").show()
+    }
+}
+
+fab3.setOnClickListener { view ->
+    if (closedSuccess) {
+        closedSuccess = false
+        SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+            override fun onClosed() {
+                closedSuccess = true
+            }
+        }).isSuccess().message("Success").show()
+    }
+}
+```

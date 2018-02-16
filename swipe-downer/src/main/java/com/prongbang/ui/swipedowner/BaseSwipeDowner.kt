@@ -18,7 +18,7 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
     private var imageError: Int = R.drawable.ic_sentiment_dissatisfied
     private var imageWarning: Int = R.drawable.ic_warning
     private var duration: Long = 2000
-    private var closed = false
+    private var isClosed = false
     private var onItemClickListener: OnSwipeDownItemClickListener? = null
     private var mViewLayout: View? = null
     private var mTvMessage: AppCompatTextView? = null
@@ -118,7 +118,7 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
     }
 
     override fun show() {
-        closed = false
+        isClosed = false
         val gestureDetector = GestureDetector(context, SingleTapConfirm())
         val slideDown = AnimationUtils.loadAnimation(context, R.anim.slide_down)
 
@@ -147,7 +147,7 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
             })
 
             mViewLayout!!.postDelayed({
-                if (!closed) {
+                if (!isClosed) {
                     hide()
                 }
             }, duration)
@@ -158,7 +158,7 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
         val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
         mViewLayout?.startAnimation(slideUp)
         mViewLayout?.postDelayed({
-            closed = true
+            isClosed = true
             mViewLayout?.visibility = View.GONE
             onCloseListener?.onClosed()
         }, 500)
@@ -177,10 +177,6 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
     override fun onClosed(onCloseListener: OnCloseListener): BaseSwipeDowner {
         this.onCloseListener = onCloseListener
         return this
-    }
-
-    override fun isClosed(): Boolean {
-        return closed
     }
 
 }
