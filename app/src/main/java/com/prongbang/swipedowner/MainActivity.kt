@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         fab1.setOnClickListener { view ->
             if (closedError) {
                 closedError = false
-                SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+                SwipeDowner(this).builder().onClosed(object : OnCloseListener {
                     override fun onClosed() {
                         closedError = true
                     }
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         fab2.setOnClickListener { view ->
             if (closedWarning) {
                 closedWarning = false
-                SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+                SwipeDowner(this).builder().onClosed(object : OnCloseListener {
                     override fun onClosed() {
                         closedWarning = true
                     }
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         fab3.setOnClickListener { view ->
             if (closedSuccess) {
                 closedSuccess = false
-                SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+                SwipeDowner(this).builder().onClosed(object : OnCloseListener {
                     override fun onClosed() {
                         closedSuccess = true
                     }

@@ -1,5 +1,6 @@
 package com.prongbang.ui.swipedowner
 
+import android.app.Activity
 import android.view.View
 
 /**
@@ -8,6 +9,8 @@ import android.view.View
 interface SwipeDownAdapter<T> {
 
     fun builder(view: View?): T
+
+    fun builder(): T
 
     fun setHeight(h: Int): T
 

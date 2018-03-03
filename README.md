@@ -2,6 +2,8 @@
 
 Swipe Downer Message Android Library
 
+![screenshot gif](https://github.com/prongbang/SwipeDowner/blob/master/screenshots/screenshots.gif?raw=true)
+
 ## Download
 
 ```build.gradle```:
@@ -16,7 +18,7 @@ allprojects {
 ...
 
 dependencies {
-    implementation 'com.github.prongbang:swipedowner:1.0.2'
+    implementation 'com.github.prongbang:swipedowner:1.0.3'
 }
 ```
 
@@ -25,54 +27,28 @@ dependencies {
 > In Activity
 ```java
 // error
-SwipeDowner(this).builder(window.decorView.rootView).isError().message("Error").show()
+SwipeDowner(this).builder().isError().message("Error").show()
 
 // warning
-SwipeDowner(this).builder(window.decorView.rootView).isWarning().message("Warning").show()
+SwipeDowner(this).builder().isWarning().message("Warning").show()
 
 // success
-SwipeDowner(this).builder(window.decorView.rootView).isSuccess().message("Success").show()
-
-// or
-val rootView = findViewById<View>(android.R.id.content).rootView
-
-// error
-SwipeDowner(this).builder(rootView).isError().message("Error").show()
-
-// warning
-SwipeDowner(this).builder(rootView).isWarning().message("Warning").show()
-
-// success
-SwipeDowner(this).builder(rootView).isSuccess().message("Success").show()
+SwipeDowner(this).builder().isSuccess().message("Success").show()
 ```
 
 > In Fragment
 ```java
 // error
-SwipeDowner(context).builder(activity?.window?.decorView?.rootView).isError().message("Error").show()
+SwipeDowner(activity).builder().isError().message("Error").show()
 
 // warning
-SwipeDowner(context).builder(activity?.window?.decorView?.rootView).isWarning().message("Warning").show()
+SwipeDowner(activity).builder().isWarning().message("Warning").show()
 
 // success
-SwipeDowner(context).builder(activity?.window?.decorView?.rootView).isSuccess().message("Success").show()
-
-// or
-override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-    // error
-    SwipeDowner(context).builder(container?.rootView).isError().message("Error").show()
-
-    // warning
-    SwipeDowner(context).builder(container?.rootView).isWarning().message("Warning").show()
-
-    // success
-    SwipeDowner(context).builder(container?.rootView).isSuccess().message("Success").show()
-
-}
+SwipeDowner(activity).builder().isSuccess().message("Success").show()
 ```
 
-> Example
+> Example in Activity
 ```kotlin
 
 var closedSuccess = true
@@ -82,7 +58,7 @@ var closedError = true
 fab1.setOnClickListener { view ->
     if (closedError) {
         closedError = false
-        SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+        SwipeDowner(this).builder().onClosed(object : OnCloseListener {
             override fun onClosed() {
                 closedError = true
             }
@@ -93,7 +69,7 @@ fab1.setOnClickListener { view ->
 fab2.setOnClickListener { view ->
     if (closedWarning) {
         closedWarning = false
-        SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+        SwipeDowner(this).builder().onClosed(object : OnCloseListener {
             override fun onClosed() {
                 closedWarning = true
             }
@@ -104,7 +80,7 @@ fab2.setOnClickListener { view ->
 fab3.setOnClickListener { view ->
     if (closedSuccess) {
         closedSuccess = false
-        SwipeDowner(this).builder(window.decorView.rootView).onClosed(object : OnCloseListener {
+        SwipeDowner(this).builder().onClosed(object : OnCloseListener {
             override fun onClosed() {
                 closedSuccess = true
             }

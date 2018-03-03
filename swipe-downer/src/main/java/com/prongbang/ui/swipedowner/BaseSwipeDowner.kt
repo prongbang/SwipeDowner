@@ -1,6 +1,6 @@
 package com.prongbang.ui.swipedowner
 
-import android.content.Context
+import android.app.Activity
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.MotionEventCompat
 import android.support.v7.widget.AppCompatImageView
@@ -12,7 +12,7 @@ import android.view.animation.AnimationUtils
 /**
  * Created by prongbang on 2/7/2018 AD.
  */
-open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<BaseSwipeDowner> {
+open class BaseSwipeDowner(private val activity: Activity) : SwipeDownAdapter<BaseSwipeDowner> {
 
     private var imageSuccess: Int = R.drawable.ic_check_circle
     private var imageError: Int = R.drawable.ic_sentiment_dissatisfied
@@ -27,7 +27,7 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
 
     override fun builder(view: View?): BaseSwipeDowner {
         if (view != null) {
-            val v = LayoutInflater.from(context).inflate(R.layout.item_swipe_downer, view as ViewGroup, false)
+            val v = LayoutInflater.from(activity.applicationContext).inflate(R.layout.item_swipe_downer, view as ViewGroup, false)
             if (v != null) {
                 // check view added
                 val findView = view.findViewById<View>(R.id.vMsgContainer)
@@ -49,6 +49,16 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
         return this
     }
 
+    override fun builder(): BaseSwipeDowner {
+
+        return builder(activity.window.decorView.rootView ?: getRootView(activity))
+    }
+
+    private fun getRootView(activity: Activity) : View {
+
+        return activity.findViewById<View>(android.R.id.content).rootView
+    }
+
     override fun setHeight(h: Int): BaseSwipeDowner {
         val params = mViewLayout?.layoutParams
         params?.height = h
@@ -56,12 +66,12 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
     }
 
     override fun setBackground(color: Int): BaseSwipeDowner {
-        mViewLayout?.setBackgroundColor(ContextCompat.getColor(context, color))
+        mViewLayout?.setBackgroundColor(ContextCompat.getColor(activity.applicationContext, color))
         return this
     }
 
     override fun setTextColor(color: Int): BaseSwipeDowner {
-        mTvMessage?.setTextColor(ContextCompat.getColor(context, color))
+        mTvMessage?.setTextColor(ContextCompat.getColor(activity.applicationContext, color))
         return this
     }
 
@@ -82,27 +92,27 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
 
     override fun isSuccess(): BaseSwipeDowner {
 
-        mViewLayout?.background = ContextCompat.getDrawable(context, R.drawable.bg_swipe_down_success)
+        mViewLayout?.background = ContextCompat.getDrawable(activity.applicationContext, R.drawable.bg_swipe_down_success)
         setTextColor(R.color.white)
-        mImage?.setImageDrawable(ContextCompat.getDrawable(context, imageSuccess))
+        mImage?.setImageDrawable(ContextCompat.getDrawable(activity.applicationContext, imageSuccess))
 
         return this
     }
 
     override fun isError(): BaseSwipeDowner {
 
-        mViewLayout?.background = ContextCompat.getDrawable(context, R.drawable.bg_swipe_down_fail)
+        mViewLayout?.background = ContextCompat.getDrawable(activity.applicationContext, R.drawable.bg_swipe_down_fail)
         setTextColor(R.color.white)
-        mImage?.setImageDrawable(ContextCompat.getDrawable(context, imageError))
+        mImage?.setImageDrawable(ContextCompat.getDrawable(activity.applicationContext, imageError))
 
         return this
     }
 
     override fun isWarning(): BaseSwipeDowner {
 
-        mViewLayout?.background = ContextCompat.getDrawable(context, R.drawable.bg_swipe_down_warning)
+        mViewLayout?.background = ContextCompat.getDrawable(activity.applicationContext, R.drawable.bg_swipe_down_warning)
         setTextColor(R.color.white)
-        mImage?.setImageDrawable(ContextCompat.getDrawable(context, imageWarning))
+        mImage?.setImageDrawable(ContextCompat.getDrawable(activity.applicationContext, imageWarning))
 
         return this
     }
@@ -113,14 +123,14 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
     }
 
     override fun message(msg: Int): BaseSwipeDowner {
-        mTvMessage?.text = context.getString(msg)
+        mTvMessage?.text = activity.applicationContext.getString(msg)
         return this
     }
 
     override fun show() {
         isClosed = false
-        val gestureDetector = GestureDetector(context, SingleTapConfirm())
-        val slideDown = AnimationUtils.loadAnimation(context, R.anim.slide_down)
+        val gestureDetector = GestureDetector(activity.applicationContext, SingleTapConfirm())
+        val slideDown = AnimationUtils.loadAnimation(activity.applicationContext, R.anim.slide_down)
 
         if (mViewLayout != null) {
             mViewLayout!!.visibility = View.VISIBLE
@@ -155,7 +165,7 @@ open class BaseSwipeDowner(private val context: Context) : SwipeDownAdapter<Base
     }
 
     override fun hide() {
-        val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
+        val slideUp = AnimationUtils.loadAnimation(activity.applicationContext, R.anim.slide_up)
         mViewLayout?.startAnimation(slideUp)
         mViewLayout?.postDelayed({
             isClosed = true
