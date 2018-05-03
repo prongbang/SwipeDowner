@@ -24,10 +24,12 @@ open class BaseSwipeDowner(private val activity: Activity) : SwipeDownAdapter<Ba
     private var mTvMessage: AppCompatTextView? = null
     private var mImage: AppCompatImageView? = null
     private var onCloseListener: OnCloseListener? = null
+    private var mViewParent: ViewGroup? = null
 
     override fun builder(view: View?): BaseSwipeDowner {
         if (view != null) {
-            val v = LayoutInflater.from(activity.applicationContext).inflate(R.layout.item_swipe_downer, view as ViewGroup, false)
+            mViewParent = view as ViewGroup
+            val v = LayoutInflater.from(activity.applicationContext).inflate(R.layout.item_swipe_downer, mViewParent, false)
             if (v != null) {
                 // check view added
                 val findView = view.findViewById<View>(R.id.vMsgContainer)
@@ -54,7 +56,7 @@ open class BaseSwipeDowner(private val activity: Activity) : SwipeDownAdapter<Ba
         return builder(activity.window.decorView.rootView ?: getRootView(activity))
     }
 
-    private fun getRootView(activity: Activity) : View {
+    private fun getRootView(activity: Activity): View {
 
         return activity.findViewById<View>(android.R.id.content).rootView
     }
@@ -170,6 +172,7 @@ open class BaseSwipeDowner(private val activity: Activity) : SwipeDownAdapter<Ba
         mViewLayout?.postDelayed({
             isClosed = true
             mViewLayout?.visibility = View.GONE
+            mViewParent?.removeView(mViewLayout)
             onCloseListener?.onClosed()
         }, 500)
     }
