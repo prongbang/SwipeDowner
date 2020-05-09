@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SwipeDowner.iml" filepath="$PROJECT_DIR$/SwipeDowner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/SwipeDowner-app.iml" filepath="$PROJECT_DIR$/app/SwipeDowner-app.iml" group="SwipeDowner/app" />
+      <module fileurl="file://$PROJECT_DIR$/swipe-downer/SwipeDowner-swipe-downer.iml" filepath="$PROJECT_DIR$/swipe-downer/SwipeDowner-swipe-downer.iml" group="SwipeDowner/swipe-downer" />
+      <module fileurl="file://$PROJECT_DIR$/Workspaces-SwipeDowner.iml" filepath="$PROJECT_DIR$/Workspaces-SwipeDowner.iml" group="SwipeDowner" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipe-downer/swipe-downer.iml" filepath="$PROJECT_DIR$/swipe-downer/swipe-downer.iml" />
     </modules>

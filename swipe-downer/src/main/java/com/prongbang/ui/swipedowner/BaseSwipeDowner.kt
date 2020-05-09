@@ -1,10 +1,10 @@
 package com.prongbang.ui.swipedowner
 
 import android.app.Activity
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.MotionEventCompat
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
+import androidx.core.view.MotionEventCompat
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils

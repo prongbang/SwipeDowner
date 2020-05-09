@@ -6,26 +6,32 @@ Swipe Downer Message Android Library
 
 ## Download
 
-```build.gradle```:
+> build.gradle
+
 ```
 allprojects {
     repositories {
-        ...
         maven { url 'https://jitpack.io' }
     }
 }
+```
 
-...
+### Support Library
 
-dependencies {
-    implementation 'com.github.prongbang:swipedowner:1.0.4'
-}
+```gradle
+implementation 'com.github.prongbang:swipedowner:1.0.4'
+```
+
+### AndroidX
+
+```gradle
+implementation 'com.github.prongbang:swipedowner:2.0.0'
 ```
 
 ## How to use
 
 > In Activity
-```java
+```kotlin
 // error
 SwipeDowner(this).builder().isError().message("Error").show()
 
@@ -37,7 +43,7 @@ SwipeDowner(this).builder().isSuccess().message("Success").show()
 ```
 
 > In Fragment
-```java
+```kotlin
 // error
 SwipeDowner(activity).builder().isError().message("Error").show()
 
@@ -50,41 +56,24 @@ SwipeDowner(activity).builder().isSuccess().message("Success").show()
 
 > Example in Activity
 ```kotlin
-
-var closedSuccess = true
-var closedWarning = true
-var closedError = true
-
 fab1.setOnClickListener { view ->
-    if (closedError) {
-        closedError = false
-        SwipeDowner(this).builder().onClosed(object : OnCloseListener {
-            override fun onClosed() {
-                closedError = true
-            }
-        }).isError().message("Error").show()
-    }
+    SwipeDowner(this).builder()
+            .isError()
+            .message("Error")
+            .show()
 }
 
 fab2.setOnClickListener { view ->
-    if (closedWarning) {
-        closedWarning = false
-        SwipeDowner(this).builder().onClosed(object : OnCloseListener {
-            override fun onClosed() {
-                closedWarning = true
-            }
-        }).isWarning().message("Warning").show()
-    }
+    SwipeDowner(this).builder()
+            .isWarning()
+            .message("Warning")
+            .show()
 }
 
 fab3.setOnClickListener { view ->
-    if (closedSuccess) {
-        closedSuccess = false
-        SwipeDowner(this).builder().onClosed(object : OnCloseListener {
-            override fun onClosed() {
-                closedSuccess = true
-            }
-        }).isSuccess().message("Success").show()
-    }
+    SwipeDowner(this).builder()
+            .isSuccess()
+            .message("Success")
+            .show()
 }
 ```
